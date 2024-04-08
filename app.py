@@ -32,6 +32,9 @@ print(response.json()["data"]["bikeRentalStation"]["bikesAvailable"])
 
 kumpulan_aseman_nimi = response.json()["data"]["bikeRentalStation"]["name"]
 pyorien_maara = response.json()["data"]["bikeRentalStation"]["bikesAvailable"]
+maksimi_pyorien_maara = response.json()["data"]["bikeRentalStation"]["spacesAvailable"]
+lat = response.json()["data"]["bikeRentalStation"]["lat"]
+lon = response.json()["data"]["bikeRentalStation"]["lon"]
 
 app = Flask(__name__)
 
@@ -45,4 +48,8 @@ def index():
     return render_template("index.html", 
     viesti=viesti, 
     pyorien_maara=pyorien_maara,
-    kumpulan_aseman_nimi=kumpulan_aseman_nimi)
+    kumpulan_aseman_nimi=kumpulan_aseman_nimi,
+    maksimi_pyorien_maara=maksimi_pyorien_maara,
+    lat=lat,
+    lon=lon
+    )

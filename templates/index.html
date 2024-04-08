@@ -13,20 +13,73 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"
     ></script>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
 </head>
 
 <body>
+    <style>
+        #map {
+            height: 400px; /* or any other value */
+            width: 50%;
+            margin: auto;
+        }
+    </style>
     <div class="text-center">
+        <br />
         <h3>Kumpula pyörätracker</h3>
         <h3>Onko Kumpulassa kaupunkipyöriä?</h3>
         <br />
+        <hr />
         <h2>{{viesti}}</h2>
-        <h1><b>{{ pyorien_maara }}</b> pyörää</h1>
+        <h1><b>{{ pyorien_maara }}</b> / {{maksimi_pyorien_maara}} pyörää</h1>
         <h2>Asemalla: {{kumpulan_aseman_nimi}}</h2>
 
         <br />
-        <a href="https://www.cs.helsinki.fi/u/tonylam/">Tehnyt: Tony Lam</a>
-        <br>
-        <a href="https://digitransit.fi/en/developers/apis/1-routing-api/bicycling/">Avoin data: Digitransit / HSL</a>
+        <hr />
+        <div id="map"></div>
+        <script>
+            var lat = parseFloat("{{ lat }}");
+            var lon = parseFloat("{{ lon }}");
+
+            var map = L.map("map").setView([lat, lon], 15);
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution:
+                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(map);
+
+            L.marker([lat, lon])
+                .addTo(map)
+                .bindPopup(
+                    "Asema: {{kumpulan_aseman_nimi}}<br>Pyöriä: {{pyorien_maara}}"
+                )
+                .openPopup();
+        </script>
+
+        <br />
+
+        <div class="btn-group-vertical">
+            <a
+                class="btn btn-primary btn"
+                href="https://www.cs.helsinki.fi/u/tonylam/"
+                >Tehnyt: Tony Lam</a
+            >
+            <a
+                class="btn btn-outline-primary btn"
+                href="https://digitransit.fi/en/developers/apis/1-routing-api/bicycling/"
+                >Avoin data: Digitransit / HSL</a
+            >
+        </div>
     </div>
 </body>
