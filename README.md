@@ -1,1 +1,0 @@
-# kumpula-citybike-tracker
