@@ -32,7 +32,7 @@ print(response.json()["data"]["bikeRentalStation"]["bikesAvailable"])
 
 kumpulan_aseman_nimi = response.json()["data"]["bikeRentalStation"]["name"]
 pyorien_maara = response.json()["data"]["bikeRentalStation"]["bikesAvailable"]
-maksimi_pyorien_maara = response.json()["data"]["bikeRentalStation"]["spacesAvailable"]
+maksimi_pyorien_maara = response.json()["data"]["bikeRentalStation"]["capacity"]
 lat = response.json()["data"]["bikeRentalStation"]["lat"]
 lon = response.json()["data"]["bikeRentalStation"]["lon"]
 
