@@ -18,7 +18,7 @@ query = """
 		stationId
 		name
 		bikesAvailable
-		spacesAvailable
+		capacity
 		lat
 		lon
 		allowDropoff
